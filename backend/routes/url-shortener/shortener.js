@@ -8,7 +8,7 @@ router.post('/create', function(req, res) {
     const {original_url}=req.body;
     const hash = crypto.randomUUID().substring(0, 5)
     shortener_map.set(hash,{original_url: original_url, counter: 0});
-    res.status(200).json({msj:`http://localhost:2000/redirect/hash/`, hash:hash, error: null});
+    res.status(200).json({msj:{url: `http://localhost:2000/redirect/hash/`, hash: hash}, error: null});
 });
 
 router.get('/getAll', function(req, res) {
@@ -25,7 +25,7 @@ router.get('/hash/:hash', async function(req, res) {
         const info = shortener_map.get(hash);
         res.status(200).json({msj:info, error: null});
     }else{
-        res.status(500).json({msj:"error", error:"The hash does not exist in the database"});
+        res.status(500).json({msj:"The hash does not exist in the database", error:true});
     }
 });
 
