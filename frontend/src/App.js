@@ -1,12 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // You can think of these components as "pages"
 // in your app.
 import PomodoroApp from "./Apps/01 Pomodoro";
 import MaskedInputApp from "./Apps/02 MaskedInput";
 import JSONtoCSV from "./Apps/03 JSONtoCSV";
 import URLShortener from "./Apps/04 URLShortener";
-import Newsletter from "./Apps/05 Newsletter";
+import OnetimeSecret from "./Apps/05 One time Secret";
+import Home from "./Home/Home";
 
 // Although the page does not ever refresh, notice how
 // React Router keeps the URL up to date as you navigate
@@ -17,7 +18,7 @@ import Newsletter from "./Apps/05 Newsletter";
 function App() {
   return (
     <Router>
-      <div>
+      <div>{/*
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -35,12 +36,12 @@ function App() {
             <Link to="/url-shortener">URLShortener</Link>
           </li>
           <li>
-            <Link to="/newsletter-subscribe">Newsletter</Link>
+            <Link to="/one-time-secret">One time Secret</Link>
           </li>
         </ul>
 
         <hr />
-
+*/}
         {/*
           A <Switch> looks through all its children <Route>
           elements and renders the first one whose path
@@ -65,8 +66,8 @@ function App() {
           <Route exact path="/url-shortener">
             <URLShortener />
           </Route>
-          <Route exact path="/newsletter-subscribe">
-            <Newsletter />
+          <Route exact path="/one-time-secret">
+            <OnetimeSecret />
           </Route>
         </Switch>
       </div>
@@ -77,11 +78,4 @@ function App() {
 // You can think of this components as "pages"
 // in your app.
 
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
 export default App;
