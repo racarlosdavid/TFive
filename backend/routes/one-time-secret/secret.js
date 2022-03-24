@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const crypto = require("crypto");
+const configs = require('../../config/config');
 
 const secret_map = new Map();
 
@@ -13,7 +14,8 @@ router.post('/create', function(req, res) {
         counter: 0
     }
     secret_map.set(hash,obj);
-    res.status(200).json({msj:`http://localhost:2000/secret/hash/`, hash:hash, error: null});
+    //console.log(req.hostname);
+    res.status(200).json({msj:`${configs.host.hostname}/secret/hash/${hash}`, hash:hash, error: null});
 });
 
 router.get('/hash/:hash', async function(req, res) {
