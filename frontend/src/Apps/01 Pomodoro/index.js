@@ -35,7 +35,7 @@ function PomodoroApp() {
         setDisplayTime(`${m}:${s}`)
         */
         setTime((time) => --time);
-      },1000);
+      },800);
       /*
       interval = setInterval(() => {
         const minutes = parseInt(((time / 60000) % 60),10)
@@ -101,7 +101,7 @@ function PomodoroApp() {
             <div className="container">
               <div className="d-flex justify-content-center">
                 <div>
-                  <h1 class="text-danger">
+                  <h1 className="text-danger">
                     {`${countdownType}`}
                   </h1>
                 </div>
@@ -112,7 +112,7 @@ function PomodoroApp() {
             <div className="container">
               <div className="d-flex justify-content-center">
                 <div>
-                  <h1 class="text-danger">
+                  <h1 className="text-danger">
                     {time === 0 ? '' : `${parseInt(time / 60,10) < 10 ? "0" + parseInt(time / 60,10) : parseInt(time / 60,10)}:${parseInt(time % 60,10) < 10 ? "0" + parseInt(time % 60,10) : parseInt(time % 60,10)}`}
                   </h1>
                 </div>
