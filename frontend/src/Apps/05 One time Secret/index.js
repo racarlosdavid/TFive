@@ -60,57 +60,55 @@ function OneTimeSecret() {
 
   return (
     <>{/*
-    <div className="App">
-      <h1>One time Secret App</h1>
-    </div>
-    <Navbar></Navbar>
-    */}
-    <Navbar></Navbar>
-    <br></br>
-    <div className="d-flex justify-content-center">
-    <div className="form-group col-md-6">
-   
-        <h1>One time Secret</h1>
-        <form onSubmit={save}>
-            
-            <div className="form-group col-md-8">
-                <label htmlFor="secret" className="form-label">Secret</label>
-                <input type="text" name="secret" id="secret" onChange={handleInputChange} className="form-control" value={data.secret}></input>
-            </div>
-
-            <div className="form-group col-md-8">
-                <label htmlFor="available" className="form-label">How many times it can be visited</label>
-                <input type="number" name="available" id="available" onChange={handleInputChange} className="form-control" value={data.available}></input>
-            </div>
-           <br></br>
-            <div className="mb-3">
-                <button type="submit" className="btn btn-primary">Create</button>
-            </div>
-         
-        </form>
-
-        <table className="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Secret URL</th>
-    </tr>
-  </thead>
-  <tbody>
-    { urls.map((url,index) => (   
-      <tr key={index}>
-        <th scope="row">{index}</th>
-        <td>{url}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-  
-    </div>
-    </div>
+      <div className="App">
+        <h1>One time Secret App</h1>
+      </div>
+      <Navbar></Navbar>
+      */}
+      <Navbar></Navbar>
+      <br></br>
+      <div className="d-flex justify-content-center">
+      <div className="form-group col-md-6">
     
+          <h1>One time Secret</h1>
+          <form onSubmit={save}>
+              
+              <div className="form-group col-md-8">
+                  <label htmlFor="secret" className="form-label">Secret</label>
+                  <input type="text" name="secret" id="secret" onChange={handleInputChange} className="form-control" value={data.secret}></input>
+              </div>
+
+              <div className="form-group col-md-8">
+                  <label htmlFor="available" className="form-label">How many times it can be visited</label>
+                  <input type="number" name="available" id="available" onChange={handleInputChange} className="form-control" value={data.available}></input>
+              </div>
+            <br></br>
+              <div className="mb-3">
+                  <button type="submit" className="btn btn-primary">Create</button>
+              </div>
+          
+          </form>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Secret URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              { urls.map((url,index) => (   
+                <tr key={index}>
+                  <th scope="row">{index}</th>
+                  <td>{url}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
     
-</>
+      </div>
+      </div>
+    </>
   );
 }
 

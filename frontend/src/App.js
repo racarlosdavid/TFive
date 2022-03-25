@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // You can think of these components as "pages"
 // in your app.
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PomodoroApp from "./Apps/01 Pomodoro";
 import MaskedInputApp from "./Apps/02 MaskedInput";
 import JSONtoCSV from "./Apps/03 JSONtoCSV";
@@ -70,6 +72,7 @@ function App() {
             <OnetimeSecret />
           </Route>
         </Switch>
+        <ToastContainer autoClose={1500} hideProgressBar />
       </div>
     </Router>
   );
