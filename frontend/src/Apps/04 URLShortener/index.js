@@ -17,7 +17,7 @@ function URLShortenerApp() {
   const save = (event) => {
     event.preventDefault()
     if (original !== '') {
-      fetch(`${config.BACKEND}/shortener/create`, {
+      fetch(`${config.URL_SHORTENER}/shortener/create`, {
           method: "POST",
           body: JSON.stringify({
             original_url: original

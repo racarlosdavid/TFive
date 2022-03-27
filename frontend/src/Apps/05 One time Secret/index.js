@@ -25,7 +25,7 @@ function OneTimeSecret() {
   
   const save = (event) => {
     event.preventDefault()
-    fetch(`${config.BACKEND}/secret/create`, {
+    fetch(`${config.ONE_TIME_SECRET}/secret/create`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
