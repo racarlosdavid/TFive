@@ -5,7 +5,7 @@ COPY . .
 RUN npm install
 ENV REACT_APP_BACKEND_ONE_TIME_SECRET default
 ENV REACT_APP_BACKEND_URL_SHORTENER default
-RUN npm build
+RUN npm run build
 
 ### STAGE 2: Run ###
 FROM nginx:1.21.6-alpine
