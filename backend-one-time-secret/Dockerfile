@@ -1,5 +1,5 @@
 FROM node:16-alpine
-WORKDIR /backendTFive
+WORKDIR /backendOneTimeSecret
 COPY . .
 RUN npm install   
 EXPOSE 2000

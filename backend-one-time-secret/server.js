@@ -24,8 +24,6 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/',require('./routes/index'));
-app.use('/shortener',require('./routes/url-shortener/shortener').router);
-app.use('/redirect',require('./routes/url-shortener/redirect'));
 app.use('/secret',require('./routes/one-time-secret/secret'));
 
 app.listen(port,()=>{

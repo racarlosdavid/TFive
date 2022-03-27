@@ -12,7 +12,7 @@ function Logs() {
     };
 
     const getLogs = () => {
-      fetch(`${config.BACKEND}/shortener/getAll`, {
+      fetch(`${config.URL_SHORTENER}/shortener/getAll`, {
           headers: {
               "content-type": "application/json"
           }
