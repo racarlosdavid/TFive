@@ -3,8 +3,8 @@ FROM node:16-alpine AS node
 WORKDIR /app
 COPY . .
 RUN npm install
-ENV REACT_APP_BACKEND_ONE_TIME_SECRET default
-ENV REACT_APP_BACKEND_URL_SHORTENER default
+ENV REACT_APP_BACKEND_ONE_TIME_SECRET https://one-time-secret-mlsdj2uhea-uc.a.run.app
+ENV REACT_APP_BACKEND_URL_SHORTENER https://url-shortener-mlsdj2uhea-uc.a.run.app
 RUN npm run build
 
 ### STAGE 2: Run ###
