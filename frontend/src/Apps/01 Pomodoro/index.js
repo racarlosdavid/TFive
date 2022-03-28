@@ -10,6 +10,8 @@ function PomodoroApp() {
   const [time, setTime] = useState(0);
   const [countdownType, setcountdownType] = useState('');
   const [memory, setMemory] = useState([]);
+  const [start, setStart] = useState(Date.now());
+  const [init_time, setInit_time] = useState(0);
   const [log,setLog] = useState({
     type: '',
     date: '',
@@ -28,14 +30,18 @@ function PomodoroApp() {
     if (time !== 0 && isActive) {
       interval = setInterval(() => {
         /*
-        const minutes = parseInt(time / 60,10)
-        const seconds = parseInt(time % 60,10)
-        const m = minutes < 10 ? "0" + minutes : minutes ;
-        const s = seconds < 10 ? "0" + seconds : seconds ;
-        setDisplayTime(`${m}:${s}`)
+        //const minutes = parseInt(time / 60,10)
+        //const seconds = parseInt(time % 60,10)
+        //const m = minutes < 10 ? "0" + minutes : minutes ;
+        //const s = seconds < 10 ? "0" + seconds : seconds ;
+        //setDisplayTime(`${m}:${s}`)
         */
-        setTime((time) => --time);
-      },800);
+       console.log(start)
+       console.log(init_time)
+        let delta = Date.now() - start; // milliseconds elapsed since start
+        let delta_t = Math.floor(delta / 1000);
+        setTime(init_time-delta_t);
+      },1000);
       /*
       interval = setInterval(() => {
         const minutes = parseInt(((time / 60000) % 60),10)
@@ -62,7 +68,7 @@ function PomodoroApp() {
     return () => {
       clearInterval(interval);
     };
-  }, [isActive,time,log,play]);
+  }, [isActive,time,init_time,start,log,play]);
 
   function getCurrentTime(){
     const date =  new Date();
@@ -83,6 +89,8 @@ function PomodoroApp() {
   function startCountdown(task_time,task_type){ 
     setIsActive(true)
     setTime(task_time*60)
+    setInit_time(task_time*60)
+    setStart(Date.now())
     setcountdownType(task_type)
     setLog({
       ...log,
