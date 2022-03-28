@@ -22,7 +22,7 @@ function Home() {
             </div>
             <br></br>
             <div className="card" >
-              <button type="button" className="btn btn-outline-secondary btn-lg"><br></br><h5>Masked Input</h5><br></br></button>
+              <button type="button" onClick={()=>goToApp("/masked-input")} className="btn btn-outline-secondary btn-lg"><br></br><h5>Masked Input</h5><br></br></button>
             </div>
             <br></br>
             <div className="card" >
