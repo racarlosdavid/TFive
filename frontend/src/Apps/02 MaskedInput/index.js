@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import "./styles.css";
 import Navbar from '../../Home/Navbar';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function MaskedInputApp() {
 
@@ -9,6 +11,7 @@ function MaskedInputApp() {
     primerApellido: '',
     segundoApellido: '',
     fechaNacimiento: '',
+    fechaNacimientoFormated: '',
     email: '',
     direccion: '',
     codigosPais: '', //(+502, +503, etc)
@@ -28,6 +31,22 @@ function MaskedInputApp() {
     });
   }
 
+  const handleDatePicker = (date) => {
+    setData({
+        ...data,
+        fechaNacimiento: date,
+        fechaNacimientoFormated: formatDate(date)
+    });
+  }
+
+  function formatDate(d){
+    const date = new Date(d)
+    const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`
+    const month = (date.getMonth()+1) < 10 ? `0${(date.getMonth()+1)}` : `${(date.getMonth()+1)}`
+    const year = date.getFullYear()
+    return [day,month,year].join('/');
+  }
+
   const save = (event) => {
     event.preventDefault(); 
     console.log('TODO SAVE INTO LOCALSTORAGE')
@@ -38,50 +57,50 @@ function MaskedInputApp() {
       <Navbar></Navbar>
       <br></br>
       <div className="d-flex justify-content-center">
-          <div className="card w-75">
-            <main className="container">
-                <h1>MaskedInput App</h1>
-                <form onSubmit={save}>
-                    <div className="row g-3 align-items-center">
+        <div className="row">
+          <main className="container">
+            <h1>MaskedInput App</h1>
+            <form onSubmit={save}>
+              <div className="row g-3 align-items-center">
                         <div className="form-group col-md-6">
-                            <label htmlFor="nombres" className="form-label">Nombres</label>
+                            <label htmlFor="nombres">Nombres</label>
                             <input type="text" name="nombres" id="nombres" onChange={handleInputChange} className="form-control" value={data.nombres}></input>
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label htmlFor="primerApellido" className="form-label">Primer apellido</label>
+                            <label htmlFor="primerApellido">Primer apellido</label>
                             <input type="text" name="primerApellido" id="primerApellido" onChange={handleInputChange} className="form-control" value={data.primerApellido}></input>
                         </div>
 
                         <div className="form-group col-md-3">
-                            <label htmlFor="segundoApellido" className="form-label">Segundo apellido</label>
+                            <label htmlFor="segundoApellido">Segundo apellido</label>
                             <input type="text" name="segundoApellido" id="segundoApellido" onChange={handleInputChange} className="form-control" value={data.segundoApellido}></input>
                         </div>
-                    </div>
-                    <br></br>
-                    <div className="row g-3 align-items-center">
-                        <div className="form-group col-md-3">
-                            <label htmlFor="fechaNacimiento" className="form-label">Fecha de nacimiento</label>
-                            <input type="text" name="fechaNacimiento" id="fechaNacimiento" onChange={handleInputChange} className="form-control" value={data.fechaNacimiento}></input>
+              </div>
+              <br></br>
+
+              <div className="row g-3 align-items-center">
+                        <div className="form-group col-md-6">
+                          <label htmlFor="numeroIdentificacionPersonal">Número de identificación</label>
+                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleInputChange} className="form-control" value={data.numeroIdentificacionPersonal} placeholder="0000 00000 0000"></input>
                         </div>
 
-                        <div className="form-group col-md-4">
-                            <label htmlFor="email" className="form-label">Email</label>
-                            <input type="text" name="email" id="email" onChange={handleInputChange} className="form-control" value={data.email}></input>
+                        <div className="form-group col-md-6">
+                          <label htmlFor="numeroPasaporte">Número de pasaporte</label>
+                          <input type="number" name="numeroPasaporte" id="numeroPasaporte" onChange={handleInputChange} className="form-control" value={data.numeroPasaporte} placeholder="0000 00000 0000"></input>
                         </div>
+              </div>
+              <br></br>
 
-                        <div className="form-group col-md-5">
-                            <label htmlFor="direccion" className="form-label">Dirección</label>
-                            <input type="text" name="direccion" id="direccion" onChange={handleInputChange} className="form-control" value={data.direccion}></input>
-                        </div>
-                    </div>
-                    <br></br>
-                    
+              <div className="row g-3 align-items-center">
 
+                      <div className="form-group col-md-4">
+                        <label htmlFor="fechaNacimiento">Fecha de nacimiento</label>
+                        <DatePicker className="form-control" selected={data.fechaNacimiento} onChange={(date) => handleDatePicker(date) } />
+                      </div>
 
-                    <div className="row g-3 align-items-center">
-                        <div className="form-group col-md-3">
-                          <label htmlFor="numeroTelefono" className="form-label">Número de teléfono</label>
+                      <div className="form-group col-md-4">
+                          <label htmlFor="numeroTelefono">Teléfono</label>
                           <div className="input-group">
                             <div className="input-group-prepend">
                                 <div className="input-group">
@@ -97,10 +116,10 @@ function MaskedInputApp() {
                               Your phone is required.
                             </div>
                           </div>
-                        </div>
+                      </div>
 
-                        <div className="form-group col-md-3">
-                          <label htmlFor="numeroTelefonoCasa" className="form-label">Número de teléfono de casa</label>
+                        <div className="form-group col-md-4">
+                          <label htmlFor="numeroTelefonoCasa">Teléfono de casa <span class="text-muted">(Opcional)</span></label>
                           <div className="input-group">
                             <div className="input-group-prepend">
                                 <div className="input-group">
@@ -114,53 +133,56 @@ function MaskedInputApp() {
                             <input type="number" name="numeroTelefonoCasa" id="numeroTelefonoCasa" onChange={handleInputChange} className="form-control" value={data.numeroTelefonoCasa}></input>
                           </div>
                         </div>
+              </div> 
+              <br></br>
 
-                        <div className="form-group col-md-6">
-                          <label htmlFor="numeroIdentificacionPersonal" className="form-label">Número de identificación personal</label>
-                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleInputChange} className="form-control" value={data.numeroIdentificacionPersonal}></input>
-                        </div>
-                    </div> 
+              <div className="form-group col-md-12">
+                      <label htmlFor="email">Email</label>
+                      <input type="text" name="email" id="email" onChange={handleInputChange} className="form-control" placeholder="you@example.com" value={data.email}></input>
+              </div>
+              <br></br>
 
+              <div className="form-group col-md-12">
+                      <label htmlFor="direccion">Dirección</label>
+                      <input type="text" name="direccion" id="direccion" onChange={handleInputChange} className="form-control" placeholder="5ta avenida 3-64 " value={data.direccion}></input>
+              </div>
 
-                    <br></br><br></br><br></br><br></br><br></br><br></br>
-                    <div className="form-group col-md-12">
-                            <label htmlFor="email" className="form-label">Email</label>
-                            <input type="text" name="email" id="email" onChange={handleInputChange} className="form-control" value={data.email}></input>
-                    </div>
-
-                    <div className="row g-3 align-items-center">
-                        
-                        <div className="form-group col-md-9">
-                            <label htmlFor="photo" className="form-label">Photo</label>
-                            <br></br> 
-                           
-                        </div>    
-                    </div>
-                    
-                    <div className="row g-3 align-items-center">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="pokemon_trainer_nickname" className="form-label">Pokemon trainer nickname</label>
-                            <input type="text" name="pokemon_trainer_nickname" id="pokemon_trainer_nickname" onChange={handleInputChange} className="form-control" value={data.pokemon_trainer_nickname}></input>
-                        </div>
-
-                        <div className="form-group col-md-6">
-                            <label htmlFor="region_of_origin" className="form-label">Region of origin</label>
-                            <input type="text" name="region_of_origin" id="region_of_origin" onChange={handleInputChange} className="form-control" value={data.region_of_origin}></input>
-                        </div>
-                    </div> 
-                    
-
-
-                    <br></br>      
-                             
-                    <br></br>
-                    <div className="mb-3">
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </main>
-          </div>
+              <hr className="mb-4"/>
+              <h4 className="mb-3">Payment</h4>
+              <div className="row">
+               
+                <div className="col-md-6 mb-3">
+                  <label for="cc-number">Número de tarjeta de crédito</label>
+                  <input type="text" className="form-control" id="cc-number" placeholder="0000 0000 0000 0000" required/>
+                  <div className="invalid-feedback">
+                    Credit card number is required
+                  </div>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label for="cc-expiration">Vencimiento de la tarjeta</label>
+                  <input type="text" className="form-control" id="cc-expiration" placeholder="MM/YY" required/>
+                  <div className="invalid-feedback">
+                    Expiration date required
+                  </div>
+                </div>
+                <div className="col-md-3 mb-3">
+                  <label for="cc-expiration">CVV</label>
+                  <input type="text" className="form-control" id="cc-cvv" placeholder="000" required/>
+                  <div className="invalid-feedback">
+                    Security code required
+                  </div>
+                </div>
+              
+              
+              </div>
+              <div className="mb-3">
+                <button type="submit" className="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </main>
+        </div>
       </div>
+    
     </>
     
   );
