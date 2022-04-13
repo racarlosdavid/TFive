@@ -1,5 +1,5 @@
 
-const Navbar = ({onJSONtoCSV,onFormatJSON,onResetTextArea}) => {
+const Navbar = ({onJSONtoCSV,onFormatJSON,onExample,onResetTextArea}) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -20,8 +20,13 @@ const Navbar = ({onJSONtoCSV,onFormatJSON,onResetTextArea}) => {
                     </button>
                 </li>
                 <li className="nav-item active">
+                    <button className="btn btn-light" onClick={onExample}>
+                        Example
+                    </button>
+                </li>
+                <li className="nav-item active">
                     <button className="btn btn-light" onClick={onResetTextArea}>
-                        Limpiar
+                        Clean
                     </button>
                 </li>
             </ul>
