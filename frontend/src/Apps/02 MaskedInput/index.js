@@ -5,6 +5,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function MaskedInputApp() {
+  const type = {
+    cadena: 'cadena',
+    numero: 'numero',
+    email: 'email',
+    direccion: 'direccion',
+    expiracion_tarjeta: 'expiracion_tarjeta'
+  }
 
   const [data, setData] = useState({
     nombres: '',
@@ -24,12 +31,69 @@ function MaskedInputApp() {
     CVC: ''
   })
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event,event_type) => {
+    let re = "";
+    switch (event_type) {
+      case type.cadena:
+        re = /^[a-zA-Z ]+$/;
+        break;
+      case type.numero:
+        re = /^[0-9\b]+$/;
+        break;
+      case type.email:
+        console.log(event_type)
+        re = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
+        break;
+      case type.direccion:
+          
+        break;
+      case type.expiracion_tarjeta:
+          
+        break;
+    }
+    
+    if (event.target.value === '' || re.exec(event.target.value)) {
+      setData({
+        ...data,
+        [event.target.name]: event.target.value
+      });
+    }
+    
+  }
+
+  const handleInputChangex = (event) => {
     setData({
         ...data,
         [event.target.name]: event.target.value
     });
   }
+
+  const handleOnChangeEmail = (event) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
+    if (event.target.value === '' || re.exec(event.target.value)) {
+      setData({
+        ...data,
+        [event.target.name]: event.target.value
+      });
+    }
+  };
+
+  const handleOnChangeName = (event) => {
+    const re = /^[a-zA-Z ]+$/;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      nameSet(event.target.value);
+    }
+  };
+
+  const handleOnChangeNumber = (event) => {
+    const re = /^[0-9\b]+$/;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      setData({
+        ...data,
+        [event.target.name]: event.target.value
+      });
+    }
+  };
 
   const handleDatePicker = (date) => {
     setData({
@@ -52,9 +116,24 @@ function MaskedInputApp() {
     console.log('TODO SAVE INTO LOCALSTORAGE')
   }
 
+  const [name, nameSet] = useState('');
+  const [number, numberSet] = useState('');
+
+  
   return (
     <>
       <Navbar></Navbar>
+      <div>
+      <label>
+        Name:
+        <input value={name} onChange={handleOnChangeName} />
+      </label>
+      <br />
+      <label>
+        Number:
+        <input value={number} onChange={handleOnChangeNumber} />
+      </label>
+    </div>
       <br></br>
       <div className="d-flex justify-content-center">
         <div className="row">
@@ -82,12 +161,12 @@ function MaskedInputApp() {
               <div className="row g-3 align-items-center">
                         <div className="form-group col-md-6">
                           <label htmlFor="numeroIdentificacionPersonal">Número de identificación</label>
-                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleInputChange} className="form-control" value={data.numeroIdentificacionPersonal} placeholder="0000 00000 0000"></input>
+                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleOnChangeNumber} className="form-control" value={data.numeroIdentificacionPersonal} placeholder="0000 00000 0000"></input>
                         </div>
 
                         <div className="form-group col-md-6">
                           <label htmlFor="numeroPasaporte">Número de pasaporte</label>
-                          <input type="number" name="numeroPasaporte" id="numeroPasaporte" onChange={handleInputChange} className="form-control" value={data.numeroPasaporte} placeholder="0000 00000 0000"></input>
+                          <input type="number" name="numeroPasaporte" id="numeroPasaporte" onChange={handleOnChangeNumber} className="form-control" value={data.numeroPasaporte} placeholder="0000 00000 0000"></input>
                         </div>
               </div>
               <br></br>
@@ -119,7 +198,7 @@ function MaskedInputApp() {
                       </div>
 
                         <div className="form-group col-md-4">
-                          <label htmlFor="numeroTelefonoCasa">Teléfono de casa <span class="text-muted">(Opcional)</span></label>
+                          <label htmlFor="numeroTelefonoCasa">Teléfono de casa <span className="text-muted">(Opcional)</span></label>
                           <div className="input-group">
                             <div className="input-group-prepend">
                                 <div className="input-group">
@@ -138,7 +217,7 @@ function MaskedInputApp() {
 
               <div className="form-group col-md-12">
                       <label htmlFor="email">Email</label>
-                      <input type="text" name="email" id="email" onChange={handleInputChange} className="form-control" placeholder="you@example.com" value={data.email}></input>
+                      <input type="text" name="email" id="email" onChange={handleOnChangeEmail} className="form-control" placeholder="you@example.com" value={data.email}></input>
               </div>
               <br></br>
 
@@ -152,21 +231,21 @@ function MaskedInputApp() {
               <div className="row">
                
                 <div className="col-md-6 mb-3">
-                  <label for="cc-number">Número de tarjeta de crédito</label>
+                  <label htmlFor="cc-number">Número de tarjeta de crédito</label>
                   <input type="text" className="form-control" id="cc-number" placeholder="0000 0000 0000 0000" required/>
                   <div className="invalid-feedback">
                     Credit card number is required
                   </div>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label for="cc-expiration">Vencimiento de la tarjeta</label>
+                  <label htmlFor="cc-expiration">Vencimiento de la tarjeta</label>
                   <input type="text" className="form-control" id="cc-expiration" placeholder="MM/YY" required/>
                   <div className="invalid-feedback">
                     Expiration date required
                   </div>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <label for="cc-expiration">CVV</label>
+                  <label htmlFor="cc-expiration">CVV</label>
                   <input type="text" className="form-control" id="cc-cvv" placeholder="000" required/>
                   <div className="invalid-feedback">
                     Security code required
