@@ -10,7 +10,7 @@ import Navbar from './Navbar';
 import json_example from "./example";
 
 function JSONtoCSVApp() {
-  const [data,setData] = useState(json_example)
+  const [data,setData] = useState('')
   const [output,setOutput] = useState('')
   //[{"nombre":"carlos"},{"nombre":"david"}]
 
@@ -18,6 +18,12 @@ function JSONtoCSVApp() {
     setData('')
     setOutput('')
   }
+
+  const onExample = () => {
+    setData(json_example)
+  }
+
+  
 
   const onFormatJSON = () => {
     setData(JSON.stringify(JSON.parse(data),null,2))
@@ -51,15 +57,18 @@ function JSONtoCSVApp() {
 
   return (
     <>
-    <Navbar onJSONtoCSV={onJSONtoCSV} onFormatJSON={onFormatJSON} onResetTextArea={onResetTextArea}></Navbar>
+    <Navbar onJSONtoCSV={onJSONtoCSV} onFormatJSON={onFormatJSON} onExample={onExample} onResetTextArea={onResetTextArea}></Navbar>
       <div>
         <CodeMirror
           value={data}
           options={{
             mode: 'javascript',
             theme: 'material',
+            
             lineNumbers: true
           }}
+        
+          height="500px"
           autoCursor={false}
           onChange={(editor, data, value) => {
             setData(value)
@@ -82,12 +91,6 @@ function JSONtoCSVApp() {
           }}
         />
       </div>
-      <pre>
-        {JSON.stringify(data, undefined, 2)}
-    </pre>
-    <pre>{JSON.stringify(data)}</pre>
-    <pre>{JSON.stringify(data, null, 2)}</pre>
-    <pre>{JSON.parse(JSON.stringify(data))}</pre>
     </>
   );
 }
