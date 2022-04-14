@@ -13,4 +13,4 @@ Proyecto final - Training Telus
 ![Alt text](Img/MaskedInput.png)
 
 ## JSON to CSV 
-![Alt text](JSONtoCSV.png)
+![Alt text](Img/JSONtoCSV.png)
