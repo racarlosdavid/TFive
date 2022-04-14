@@ -67,8 +67,6 @@ function JSONtoCSVApp() {
             
             lineNumbers: true
           }}
-        
-          height="500px"
           autoCursor={false}
           onChange={(editor, data, value) => {
             setData(value)
