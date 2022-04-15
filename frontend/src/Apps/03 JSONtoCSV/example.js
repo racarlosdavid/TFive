@@ -12,12 +12,6 @@ const json_example = [
        "comment": ""
     },
     {
-       "id": 3,
-       "name": "Barney & Company",
-       "amount": 0,
-       "comment": "Great to work with and always pays with cash."
-    },
-    {
        "id": 4,
        "name": "Johnson's Automotive",
        "amount": 2344,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 //import { toast } from 'react-toastify'
 //import { useHistory } from "react-router-dom";
@@ -15,6 +15,39 @@ function OneTimeSecret() {
   })
 
   const [urls, setUrls] = useState([])
+
+  useEffect(()=>{
+
+  fetch(`${config.ONE_TIME_SECRET}/secret/getAllLinks`, {
+      headers: {
+          "content-type": "application/json"
+      }
+  })
+  .then(response => {
+      return response.json()
+  })
+  .then(data => {
+    console.log(data)
+    
+      if (data.error == null) {
+          //context_userUpdate(data.msj)
+         
+          setUrls(data.msj)
+          
+          //setOriginal('')
+          /*
+          toast.success(`Welcome ${data.msj.name}`, {
+              onClose: () => {
+                  history.replace("/profile")
+              }
+          })*/
+      }else{
+          //toast.error(data.msj)
+      }
+      return 'x';
+  })
+
+  },[])
 
   const handleInputChange = (event) => {
     setData({

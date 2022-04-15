@@ -48,6 +48,14 @@ router.get('/getAll', function(req, res) {
     res.status(200).json({msj:all, error: null});
 });
 
+router.get('/getAllLinks', function(req, res) {
+    let all = [];
+    secret_map.forEach((value,key)=>{
+        all.push(`${configs.host.hostname}/secret/hash/${key}`)
+    })
+    res.status(200).json({msj:all, error: null});
+});
+
 function getHTML (secret){
     const index = `<!DOCTYPE html>
     <html>

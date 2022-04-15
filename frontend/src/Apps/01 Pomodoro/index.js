@@ -157,7 +157,7 @@ function PomodoroApp() {
       <div className="card" >
         <img className="img-fluid" 
           src={`${process.env.PUBLIC_URL}/Cards/5min.png`} 
-          alt="5min" onClick={() => countdownType === "" ? startCountdown(5,types.pomodoro) : false}
+          alt="5min" onClick={() => countdownType === "" ? startCountdown(5,types.short_break) : false}
         />
       </div>
     </div>
@@ -165,7 +165,7 @@ function PomodoroApp() {
       <div className="card" >
         <img className="img-fluid" 
           src={`${process.env.PUBLIC_URL}/Cards/15min.png`} 
-          alt="15min" onClick={() => countdownType === "" ? startCountdown(15,types.pomodoro) : false}
+          alt="15min" onClick={() => countdownType === "" ? startCountdown(15,types.long_break) : false}
         />
       </div>
     </div>
