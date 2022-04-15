@@ -1,38 +1,32 @@
-import React, { Fragment, useState } from "react";
+import React, {useState } from "react";
 import "./styles.css";
 import Navbar from '../../Home/Navbar';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import codes from 'country-calling-code';
 
 function MaskedInputApp() {
 
-  const [data, setData] = useState({
+  const dataObject = {
     nombres: '',
-    nombreserror: '',
     primerApellido: '',
-    primerApellidoerror: '',
     segundoApellido: '',
-    segundoApellidoerror: '',
     fechaNacimiento: '',
     fechaNacimientoFormated: '',
     email: '',
     direccion: '',
-    direccionerror: '',
-    codigosPais: '', //(+502, +503, etc)
+    codigosPaisTelefono: '', //(+502, +503, etc)
+    codigosPaisCasa: '', //(+502, +503, etc)
     numeroTelefono: '',
-    numeroTelefonoerror: '',
     numeroTelefonoCasa: '', //Opcional
-    numeroTelefonoCasaerror: '', //Opcional
     numeroIdentificacionPersonal: '',
-    numeroIdentificacionPersonalerror: '',
     numeroPasaporte: '',
-    numeroPasaporteerror: '',
     numeroTarjetaCredito: '',
     fechaVencimientoTarjeta: '',
     CVV: ''
-  })
+  }
 
-  const [dataEmergencia, setDataEmergencia] = useState({
+  const dataEmergenciaObject = {
     nombres: '',
     primerApellido: '',
     segundoApellido: '',
@@ -41,11 +35,12 @@ function MaskedInputApp() {
     direccion: '',
     codigosPais: '', //(+502, +503, etc)
     numeroTelefono: '',
-  })
+  }
 
-
-  
+  const [data, setData] = useState(dataObject)
+  const [dataEmergencia, setDataEmergencia] = useState(dataEmergenciaObject)  
   const [emailerror, setemailerror] = useState('')
+  const [emailerrorEmergencia, setemailerrorEmergencia] = useState('')
   const [numeroTarjetaCreditoerror, setnumeroTarjetaCreditoerror] = useState('')
   const [fechaVencimientoTarjetaerror, setfechaVencimientoTarjetaerror] = useState('')
   const [CVVerror, setCVVerror] = useState('')
@@ -63,16 +58,6 @@ function MaskedInputApp() {
         [event.target.name]: event.target.value
     });
   }
-
-  const handleOnChangeName = (event) => {
-    const re = /^[a-zA-Z ]+$/;
-   
-  };
-
-  const handleOnChangeNumber = (event) => {
-    const re = /^[0-9\b]+$/;
-   
-  };
 
   const handleDatePicker = (date,opcional) => {
     if (opcional===true) {
@@ -100,12 +85,23 @@ function MaskedInputApp() {
 
  
   function emailValidation(){
-    const regex = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
+    const regex = /^(([^<>()[\]\\.,;:\s@”]+(\.[^<>()[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
     if(!data.email || regex.test(data.email) === false){
       setemailerror('Email is not valid');
       return false;
     }else{
       setemailerror('');
+    }
+    return true;
+  }
+
+  function emailEmergenciaValidation(){
+    const regex = /^(([^<>()[\]\\.,;:\s@”]+(\.[^<>()[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
+    if(!dataEmergencia.email || regex.test(dataEmergencia.email) === false){
+      setemailerrorEmergencia('Email is not valid');
+      return false;
+    }else{
+      setemailerrorEmergencia('');
     }
     return true;
   }
@@ -146,17 +142,20 @@ function MaskedInputApp() {
   const save = (event) => {
     event.preventDefault(); 
     const validation = emailValidation() &&
+    emailEmergenciaValidation() &&
     cardNumberValidation() && 
     cvvValidation() &&
     fechaVencimientoTarjetaValidation();
 
     if (validation) {
-      localStorage.setItem(data.email, {...data,DatosEmergencia: dataEmergencia});
+      localStorage.setItem(data.email,JSON.stringify({...data,DatosEmergencia: dataEmergencia}));
+      setData(dataObject)
+      setDataEmergencia(dataEmergenciaObject)
     }
     
     
-    console.log(data)
-    console.log('TODO SAVE INTO LOCALSTORAGE')
+    //console.log(data)
+    //console.log('TODO SAVE INTO LOCALSTORAGE')
   }
 
   return (
@@ -189,12 +188,12 @@ function MaskedInputApp() {
               <div className="row g-3 align-items-center">
                         <div className="form-group col-md-6">
                           <label htmlFor="numeroIdentificacionPersonal">Número de identificación</label>
-                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleOnChangeNumber} className="form-control" value={data.numeroIdentificacionPersonal} placeholder="0000 00000 0000" required></input>
+                          <input type="number" name="numeroIdentificacionPersonal" id="numeroIdentificacionPersonal" onChange={handleInputChange} className="form-control" value={data.numeroIdentificacionPersonal} placeholder="0000 00000 0000" required></input>
                         </div>
 
                         <div className="form-group col-md-6">
                           <label htmlFor="numeroPasaporte">Número de pasaporte</label>
-                          <input type="number" name="numeroPasaporte" id="numeroPasaporte" onChange={handleOnChangeNumber} className="form-control" value={data.numeroPasaporte} placeholder="0000 00000 0000" required></input>
+                          <input type="number" name="numeroPasaporte" id="numeroPasaporte" onChange={handleInputChange} className="form-control" value={data.numeroPasaporte} placeholder="0000 00000 0000" required></input>
                         </div>
               </div>
               <br></br>
@@ -211,17 +210,17 @@ function MaskedInputApp() {
                           <div className="input-group">
                             <div className="input-group-prepend">
                                 <div className="input-group">
-                                  <select name="codigosPais" id="codigosPais" onChange={handleInputChange} className="form-control" value={data.codigosPais}>
-                                    <option key="502" value="502">502</option>
-                                    <option key="503" value="503">503</option>
-                                    <option key="504" value="504">504</option>
+                                  <select name="codigosPaisTelefono" id="codigosPaisTelefono" onChange={handleInputChange} className="form-control" value={data.codigosPaisTelefono}>
+                                    {
+                                      codes.map((country,index)=>(
+                                          country.countryCodes.length === 1 ? <option key={index} value={country.countryCodes}>{country.isoCode2} {country.countryCodes}</option> : null
+                                      ))
+                                    }
                                   </select>
                                 </div>
                             </div>
                             <input type="number" name="numeroTelefono" id="numeroTelefono" onChange={handleInputChange} className="form-control" value={data.numeroTelefono} required></input>
-                            <div className="invalid-feedback">
-                              Your phone is required.
-                            </div>
+                           
                           </div>
                       </div>
 
@@ -230,10 +229,12 @@ function MaskedInputApp() {
                           <div className="input-group">
                             <div className="input-group-prepend">
                                 <div className="input-group">
-                                  <select name="codigosPais" id="codigosPais" onChange={handleInputChange} className="form-control" value={data.codigosPais}>
-                                    <option key="502" value="502">502</option>
-                                    <option key="503" value="503">503</option>
-                                    <option key="504" value="504">504</option>
+                                  <select name="codigosPaisCasa" id="codigosPaisCasa" onChange={handleInputChange} className="form-control" value={data.codigosPaisCasa}>
+                                    {
+                                      codes.map((country,index)=>(
+                                        country.countryCodes.length === 1 ? <option key={index} value={country.countryCodes}>{country.isoCode2} {country.countryCodes}</option> : null
+                                    ))
+                                    }
                                   </select>
                                 </div>
                             </div>
@@ -261,17 +262,17 @@ function MaskedInputApp() {
                
                 <div className="col-md-6 mb-3">
                   <label htmlFor="numeroTarjetaCredito">Número de tarjeta de crédito</label>
-                  <input type="number" className="form-control" name="numeroTarjetaCredito" id="numeroTarjetaCredito" placeholder="0000 0000 0000 0000" required onChange={handleInputChange}/>
+                  <input type="number" className="form-control" name="numeroTarjetaCredito" id="numeroTarjetaCredito" placeholder="0000 0000 0000 0000" required onChange={handleInputChange} value={data.numeroTarjetaCredito}/>
                   <span className="text-danger">{numeroTarjetaCreditoerror}</span>
                 </div>
                 <div className="col-md-3 mb-3">
                   <label htmlFor="fechaVencimientoTarjeta">Vencimiento de la tarjeta</label>
-                  <input type="text" className="form-control" name="fechaVencimientoTarjeta" id="fechaVencimientoTarjeta" placeholder="MM/YY" required onChange={handleInputChange}/>
+                  <input type="text" className="form-control" name="fechaVencimientoTarjeta" id="fechaVencimientoTarjeta" placeholder="MM/YY" required onChange={handleInputChange} value={data.fechaVencimientoTarjeta}/>
                   <span className="text-danger">{fechaVencimientoTarjetaerror}</span>
                 </div>
                 <div className="col-md-3 mb-3">
                   <label htmlFor="CVV">CVV</label>
-                  <input type="number" className="form-control" name="CVV" id="CVV" placeholder="000" required onChange={handleInputChange} />
+                  <input type="number" className="form-control" name="CVV" id="CVV" placeholder="000" required onChange={handleInputChange} value={data.CVV}/>
                   <span className="text-danger">{CVVerror}</span>
                 </div>
               
@@ -312,9 +313,11 @@ function MaskedInputApp() {
                             <div className="input-group-prepend">
                                 <div className="input-group">
                                   <select name="codigosPais" id="codigosPais" onChange={handleInputChangeEmergency} className="form-control" value={dataEmergencia.codigosPais}>
-                                    <option key="502" value="502">502</option>
-                                    <option key="503" value="503">503</option>
-                                    <option key="504" value="504">504</option>
+                                    {
+                                      codes.map((country,index)=>(
+                                        country.countryCodes.length === 1 ? <option key={index} value={country.countryCodes}>{country.isoCode2} {country.countryCodes}</option> : null
+                                    ))
+                                    }
                                   </select>
                                 </div>
                             </div>
@@ -332,7 +335,7 @@ function MaskedInputApp() {
               <div className="form-group col-md-12">
                       <label htmlFor="email">Email</label>
                       <input type="text" name="email" id="email" onChange={handleInputChangeEmergency} className="form-control" placeholder="you@example.com" value={dataEmergencia.email}></input>
-                      <span className="text-danger">{emailerror}</span>
+                      <span className="text-danger">{emailerrorEmergencia}</span>
               </div>
               <br></br>
 

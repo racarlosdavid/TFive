@@ -25,6 +25,16 @@ function PomodoroApp() {
     long_break: 'Descanso Largo (15 min)'
   }
 
+  useEffect(()=>{
+    const pomodoroSaved = sessionStorage.getItem("pomodoro") === null ? [] : JSON.parse(sessionStorage.getItem("pomodoro"));
+    //console.log(pomodoroSaved)
+    setMemory(pomodoroSaved);
+  },[])
+
+  useEffect(()=>{
+    sessionStorage.setItem("pomodoro", JSON.stringify(memory));
+  },[memory])
+
   useEffect(() => {
     let interval = null;
     if (time !== 0 && isActive) {
@@ -36,8 +46,8 @@ function PomodoroApp() {
         //const s = seconds < 10 ? "0" + seconds : seconds ;
         //setDisplayTime(`${m}:${s}`)
         */
-       console.log(start)
-       console.log(init_time)
+       //console.log(start)
+       //console.log(init_time)
         let delta = Date.now() - start; // milliseconds elapsed since start
         let delta_t = Math.floor(delta / 1000);
         setTime(init_time-delta_t);
@@ -64,6 +74,10 @@ function PomodoroApp() {
       play()
       clearInterval(interval);
       
+      //pomodoroSaved.push(log)
+      //sessionStorage.setItem("pomodoro", pomodoroSaved);
+      //sessionStorage.setItem("pomodoro", JSON.stringify(memory));
+      //sessionStorage.setItem("pomodoros", memory);
     }
     return () => {
       clearInterval(interval);
@@ -128,22 +142,42 @@ function PomodoroApp() {
             </div>
             <br></br>
             
-            <div className="container">
-              <div className="d-flex justify-content-around">
-                <div className="card" >
-                  <button type="button" disabled={ countdownType === "" ? false : true } className="btn btn-outline-success btn-lg" onClick={() => startCountdown(25,types.pomodoro)}>Pomodoro<br></br>(25min)</button>
-                </div>
-                <br></br>
-                <div className="card" >
-                  <button type="button" disabled={countdownType === "" ? false : true} className="btn btn-outline-info btn-lg" onClick={() => startCountdown(5,types.short_break)}>Descanso corto<br></br>(5min)</button>
-                </div>
-                <br></br>
-                <div className="card" >
-                  <button type="button" disabled={countdownType === "" ? false : true} className="btn btn-outline-info btn-lg" onClick={() => startCountdown(15,types.long_break)}>Descanso largo<br></br>(15min)</button>
-                </div>
-              </div>
-            </div>
+{/** */}
+<div className="container-fluid">
+  <div className="row justify-content-around">
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/25min.png`} 
+          alt="25min" onClick={() => countdownType === "" ? startCountdown(25,types.pomodoro) : false}
+        />
+      </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/5min.png`} 
+          alt="5min" onClick={() => countdownType === "" ? startCountdown(5,types.pomodoro) : false}
+        />
+      </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/15min.png`} 
+          alt="15min" onClick={() => countdownType === "" ? startCountdown(15,types.pomodoro) : false}
+        />
+      </div>
+    </div>
+  </div>
+
+ 
+</div>
+{/** */}
+           
             <br></br>
+            {memory.length > 0 ?
+
             <table className="table">
               <thead>
                 <tr>
@@ -166,6 +200,8 @@ function PomodoroApp() {
                 )) }
               </tbody>
             </table>
+            : null 
+            }
         </div>
       </div>
       <div>

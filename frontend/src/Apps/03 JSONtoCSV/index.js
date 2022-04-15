@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {UnControlled as CodeMirror} from 'react-codemirror2'
-import 'codemirror/lib/codemirror.css';
+import './codemirror.css';
 import 'codemirror/theme/base16-dark.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript';
@@ -58,37 +58,62 @@ function JSONtoCSVApp() {
   return (
     <>
     <Navbar onJSONtoCSV={onJSONtoCSV} onFormatJSON={onFormatJSON} onExample={onExample} onResetTextArea={onResetTextArea}></Navbar>
-      <div>
-        <CodeMirror
-          value={data}
-          options={{
-            mode: 'javascript',
-            theme: 'material',
-            
-            lineNumbers: true
-          }}
-          autoCursor={false}
-          onChange={(editor, data, value) => {
-            setData(value)
-            setOutput('')
-          }}
-        />
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      
+      <div class="card" style={{height: "200", width: "100%"}} >
+        <div class="card-header">
+          JSON
+        </div>
+        <div>
+          <CodeMirror
+            value={data}
+            options={{
+              mode: 'javascript',
+              theme: 'material',
+              
+              lineNumbers: true
+            }}
+            autoCursor={false}
+            onChange={(editor, data, value) => {
+              setData(value)
+              setOutput('')
+            }}
+          />
+        </div>
       </div>
+      
+     
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          CSV
+        </div>
+        <div>
+          <CodeMirror
+            value={output}
+            options={{
+              mode: 'javascript',
+              theme: 'base16-dark',
+              lineNumbers: true,
+              readOnly: true,
+            }}
+            onChange={(editor, data, value) => {
+                
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+      
+      
       <br></br>
-      <div>
-        <CodeMirror
-          value={output}
-          options={{
-            mode: 'javascript',
-            theme: 'base16-dark',
-            lineNumbers: true,
-            readOnly: true,
-          }}
-          onChange={(editor, data, value) => {
-            
-          }}
-        />
-      </div>
+      
     </>
   );
 }

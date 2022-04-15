@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar';
 import { useHistory } from "react-router-dom";
-
 function Home() {
   const history = useHistory();
 
@@ -14,31 +13,64 @@ function Home() {
       <Navbar></Navbar>
       <br></br>
 
-      <div className="container">
-        <div className="d-flex justify-content-center">
-          <div className="form-group col-md-4">
-            <div className="card" >
-                <button type="button" onClick={()=>goToApp("/pomodoro")} className="btn btn-outline-primary btn-lg"><br></br><h5>Pomodoro</h5><br></br></button>
-            </div>
-            <br></br>
-            <div className="card" >
-              <button type="button" onClick={()=>goToApp("/masked-input")} className="btn btn-outline-secondary btn-lg"><br></br><h5>Masked Input</h5><br></br></button>
-            </div>
-            <br></br>
-            <div className="card" >
-            <button type="button" onClick={()=>goToApp("/json-to-csv")} className="btn btn-outline-success btn-lg"><br></br><h5>JSON to CSV</h5><br></br></button>
-            </div>
-            <br></br>
-            <div className="card" >
-              <button type="button" onClick={()=>goToApp("/url-shortener")} className="btn btn-outline-warning btn-lg"><br></br><h5>URLShortener</h5><br></br></button>
-            </div>
-            <br></br>
-            <div className="card" >
-                <button type="button" onClick={()=>goToApp("/one-time-secret")} className="btn btn-outline-info btn-lg"><br></br><h5>One time Secret</h5><br></br></button>
-            </div>
-          </div>
-        </div>
+      <div className="container-fluid">
+  <div className="row justify-content-around">
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/Pomodoro.png`} 
+          alt="Pomodoro" onClick={()=>goToApp("/pomodoro")}
+        />
       </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/MaskedInput.png`} 
+          alt="MaskedInput" onClick={()=>goToApp("/masked-input")}
+        />
+      </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/JSONtoCSV.png`} 
+          alt="MaskedInput" onClick={()=>goToApp("/json-to-csv")}
+        />
+      </div>
+    </div>
+  </div>
+<br/>
+  <div className="row justify-content-around">
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/URLShortener.png`} 
+          alt="URLShortener" onClick={()=>goToApp("/url-shortener")}
+        />
+      </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <img className="img-fluid" 
+          src={`${process.env.PUBLIC_URL}/Cards/OnetimeSecret.png`} 
+          alt="OnetimeSecret" onClick={()=>goToApp("/one-time-secret")}
+        />
+      </div>
+    </div>
+    <div className="col-4">
+      <div className="card" >
+        <a href="https://github.com/racarlosdavid/TFive">
+          <img className="img-fluid" 
+            src={`${process.env.PUBLIC_URL}/Cards/Github.png`} 
+            alt="Github" 
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+ 
+</div>
 
       <footer>
         <nav>

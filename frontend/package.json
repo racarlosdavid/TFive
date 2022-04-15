@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "bootstrap": "^5.1.3",
     "codemirror": "^5.65.2",
+    "country-calling-code": "^0.0.3",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.2",
     "react-codemirror2": "^7.2.1",
@@ -45,7 +46,6 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC"
 }
