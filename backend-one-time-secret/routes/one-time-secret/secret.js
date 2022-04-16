@@ -31,7 +31,8 @@ router.get('/hash/:hash', async function(req, res) {
             secret_map.set(hash,updated);
             res.send(index);
         }else{
-            res.status(301).json({msj:"The secret is no longer available", error: null});
+            //res.status(301).json({msj:"The secret is no longer available", error: null});
+            res.send(getHTMLExpired());
         }
         
     }else{
@@ -90,6 +91,28 @@ function getHTML (secret){
                 </div>
                 </div>
             </div>
+        </div>
+    </body>
+    </html>
+    `;
+    return index;
+}
+
+function getHTMLExpired (){
+    const index = `<!DOCTYPE html>
+    <html>
+    <head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Secret</title>
+    </head>
+    <body>
+        <div class="vh-100 d-flex justify-content-center align-items-center">
+                
+        <img src="https://raw.githubusercontent.com/racarlosdavid/TFive/main/Img/SecretNotFound.png" alt="Trulli" width="500" height="333">
+           
         </div>
     </body>
     </html>

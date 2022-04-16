@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 //import { toast } from 'react-toastify'
 //import { useHistory } from "react-router-dom";
@@ -15,7 +15,7 @@ function OneTimeSecret() {
   })
 
   const [urls, setUrls] = useState([])
-
+/*
   useEffect(()=>{
 
   fetch(`${config.ONE_TIME_SECRET}/secret/getAllLinks`, {
@@ -35,12 +35,7 @@ function OneTimeSecret() {
           setUrls(data.msj)
           
           //setOriginal('')
-          /*
-          toast.success(`Welcome ${data.msj.name}`, {
-              onClose: () => {
-                  history.replace("/profile")
-              }
-          })*/
+    
       }else{
           //toast.error(data.msj)
       }
@@ -48,7 +43,7 @@ function OneTimeSecret() {
   })
 
   },[])
-
+*/
   const handleInputChange = (event) => {
     setData({
         ...data,
@@ -121,7 +116,7 @@ function OneTimeSecret() {
               </div>
           
           </form>
-
+          {urls.length > 0 ?
           <table className="table">
             <thead>
               <tr>
@@ -138,7 +133,8 @@ function OneTimeSecret() {
               ))}
             </tbody>
           </table>
-    
+            : null 
+          }
       </div>
       </div>
     </>
