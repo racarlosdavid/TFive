@@ -3,5 +3,5 @@ WORKDIR /backendUrlShortener
 COPY . .
 RUN npm install 
 ENV HOST default   
-EXPOSE 3000
+EXPOSE 3001
 CMD ["npm","start"]

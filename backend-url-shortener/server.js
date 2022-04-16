@@ -4,7 +4,7 @@ var morgan = require('morgan');
 var cors = require('cors');
 
 //Settings
-const port = 3000;
+const port = 3001;
 
 //Middlewares
 app.use(express.json({ limit: '50mb', extended: true }));
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/',require('./routes/index'));
-app.use('/shortener',require('./routes/url-shortener/shortener').router);
+app.use('/shortener',require('./routes/url-shortener/shortener'));
 app.use('/redirect',require('./routes/url-shortener/redirect'));
 
 app.listen(port,()=>{

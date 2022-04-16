@@ -16,6 +16,7 @@ El proyecto consiste en 5 aplicaciones diferentes las cuales se describen a cont
 ## Herramientas Utilizadas
 - [ React ]()
 - [ Express ]()
+- [ Jest ]()
 - [ Docker ]()
 - [ Google Cloud Platform ]()
 
@@ -57,11 +58,21 @@ La app Masked Input permite acortar URLs válidas, creando una URL corta que red
 ![Alt text](Img/URLShortener1.png)
 ![Alt text](Img/URLShortener2.png)
 
-## Masked Input 
-La app Masked Input permite acortar URLs válidas, creando una URL corta que redirija a nuestra URL original. Para crear un link corto solamente es necesario ingresar el link y presionar el boton create y asi de sencillo se obtendra el link nuevo el cual el suario podra usar para acceder al link original. Tambien se cuenta con un contador de las veces que se a utilizado el link de manera que si se desea ver este conteo solamente es necesario presionar el boton Logs y se procedera a desplegar las veces que se a utilizado un link.
-![Alt text](Img/URLShortener1.png)
-![Alt text](Img/URLShortener2.png)
+## One time Secret 
+Esta app permite crear secretos que solamente se puedan ver una vez o puedes ingresar el numero de veces que puede ser visitado el link antes de que sean destruidos.
+- Se ingresa el secret y la cantidad de veces que se puede ver antes de ser destruido, si no se ingresa un numero de veces solamente se podria ver una vez antes de ser destruido.
+![Alt text](Img/OnetimeSecret1.png)
+- Se genera el link para que el usuario pueda visitarlo y ver el secret.
+![Alt text](Img/OnetimeSecret2.png)
+- Al visitar el link se puede visualizar un boton y al presionarlo se podra observar el secret.
+![Alt text](Img/OnetimeSecret3.png)
+![Alt text](Img/OnetimeSecret4.png)
+- Si se visita el link una vez que el secret fue destruido solamente se podra visualizar un mensaje de error.
+![Alt text](Img/OnetimeSecret5.png)
 
+## Test with JEST
+![Alt text](Img/URLShortenerJest.png)
+![Alt text](Img/OnetimeSecretJest.png)
 
 ### Clonar el repositorio
 Para clonar el repositorio ejecuta el comando:

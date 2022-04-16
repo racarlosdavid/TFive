@@ -12,65 +12,64 @@ function Home() {
     <>
       <Navbar></Navbar>
       <br></br>
-
       <div className="container-fluid">
-  <div className="row justify-content-around">
-    <div className="col-4">
-      <div className="card" >
-        <img className="img-fluid" 
-          src={`${process.env.PUBLIC_URL}/Cards/Pomodoro.png`} 
-          alt="Pomodoro" onClick={()=>goToApp("/pomodoro")}
-        />
+        <div className="row justify-content-around">
+          <div className="col-4">
+            <div className="card" >
+              <img className="img-fluid" 
+                src={`${process.env.PUBLIC_URL}/Cards/Pomodoro.png`} 
+                alt="Pomodoro" onClick={()=>goToApp("/pomodoro")}
+              />
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="card" >
+              <img className="img-fluid" 
+                src={`${process.env.PUBLIC_URL}/Cards/MaskedInput.png`} 
+                alt="MaskedInput" onClick={()=>goToApp("/masked-input")}
+              />
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="card" >
+              <img className="img-fluid" 
+                src={`${process.env.PUBLIC_URL}/Cards/JSONtoCSV.png`} 
+                alt="MaskedInput" onClick={()=>goToApp("/json-to-csv")}
+              />
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div className="row justify-content-around">
+          <div className="col-4">
+            <div className="card" >
+              <img className="img-fluid" 
+                src={`${process.env.PUBLIC_URL}/Cards/URLShortener.png`} 
+                alt="URLShortener" onClick={()=>goToApp("/url-shortener")}
+              />
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="card" >
+              <img className="img-fluid" 
+                src={`${process.env.PUBLIC_URL}/Cards/OnetimeSecret.png`} 
+                alt="OnetimeSecret" onClick={()=>goToApp("/one-time-secret")}
+              />
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="card" >
+              <a href="https://github.com/racarlosdavid/TFive">
+                <img className="img-fluid" 
+                  src={`${process.env.PUBLIC_URL}/Cards/Github.png`} 
+                  alt="Github" 
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      
       </div>
-    </div>
-    <div className="col-4">
-      <div className="card" >
-        <img className="img-fluid" 
-          src={`${process.env.PUBLIC_URL}/Cards/MaskedInput.png`} 
-          alt="MaskedInput" onClick={()=>goToApp("/masked-input")}
-        />
-      </div>
-    </div>
-    <div className="col-4">
-      <div className="card" >
-        <img className="img-fluid" 
-          src={`${process.env.PUBLIC_URL}/Cards/JSONtoCSV.png`} 
-          alt="MaskedInput" onClick={()=>goToApp("/json-to-csv")}
-        />
-      </div>
-    </div>
-  </div>
-<br/>
-  <div className="row justify-content-around">
-    <div className="col-4">
-      <div className="card" >
-        <img className="img-fluid" 
-          src={`${process.env.PUBLIC_URL}/Cards/URLShortener.png`} 
-          alt="URLShortener" onClick={()=>goToApp("/url-shortener")}
-        />
-      </div>
-    </div>
-    <div className="col-4">
-      <div className="card" >
-        <img className="img-fluid" 
-          src={`${process.env.PUBLIC_URL}/Cards/OnetimeSecret.png`} 
-          alt="OnetimeSecret" onClick={()=>goToApp("/one-time-secret")}
-        />
-      </div>
-    </div>
-    <div className="col-4">
-      <div className="card" >
-        <a href="https://github.com/racarlosdavid/TFive">
-          <img className="img-fluid" 
-            src={`${process.env.PUBLIC_URL}/Cards/Github.png`} 
-            alt="Github" 
-          />
-        </a>
-      </div>
-    </div>
-  </div>
- 
-</div>
 
       <footer>
         <nav>
@@ -85,9 +84,10 @@ function Home() {
           
             <div className="pr-xl-4">
               
-              <p className="rights"><span>©  </span><span className="copyright-year">2022</span><span> </span><span>COMPANY</span><span>. </span><span>All Rights Reserved.</span></p>
+              <p className="rights"><span>©  </span><span className="copyright-year">2022</span><span> </span><span>DSU</span></p>
             </div>
           </div>
+          {}
           <div className="col-md-4">
             <h5>Contacto</h5>
             <dl className="contact-list">

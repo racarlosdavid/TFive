@@ -126,8 +126,8 @@ function OneTimeSecret() {
             </thead>
             <tbody>
               { urls.map((url,index) => (   
-                <tr key={index}>
-                  <th scope="row">{index}</th>
+                <tr key={index+1}>
+                  <th scope="row">{index+1}</th>
                   <td>{url}</td>
                 </tr>
               ))}

@@ -29,3 +29,5 @@ app.use('/secret',require('./routes/one-time-secret/secret'));
 app.listen(port,()=>{
     console.log('Server listen on port: ', port);
 }); 
+
+module.exports = app;
